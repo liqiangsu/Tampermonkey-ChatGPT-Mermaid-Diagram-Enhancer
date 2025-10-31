@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ChatGPT Mermaid Diagram Enhancer
 // @namespace    https://github.com/yourusername/chatgpt-mermaid-enhancer
-// @version      1.0.4
+// @version      1.0.6
 // @description  Enhances ChatGPT by adding buttons to visualize Mermaid diagrams in code blocks
 // @author       Danny Su
 // @match        https://chatgpt.com/c/*
