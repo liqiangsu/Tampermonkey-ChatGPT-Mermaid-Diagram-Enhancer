@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         ChatGPT Mermaid Diagram Enhancer
-// @namespace    https://github.com/yourusername/chatgpt-mermaid-enhancer
+// @namespace    https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer
 // @version      1.0.6
 // @description  Enhances ChatGPT by adding buttons to visualize Mermaid diagrams in code blocks
 // @author       Danny Su
@@ -10,10 +10,10 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @run-at       document-end
-// @updateURL    https://raw.githubusercontent.com/yourusername/chatgpt-mermaid-enhancer/main/chatgpt-mermaid-enhancer.user.js
-// @downloadURL  https://raw.githubusercontent.com/yourusername/chatgpt-mermaid-enhancer/main/chatgpt-mermaid-enhancer.user.js
-// @supportURL   https://github.com/yourusername/chatgpt-mermaid-enhancer/issues
-// @homepageURL  https://github.com/yourusername/chatgpt-mermaid-enhancer
+// @updateURL    https://raw.githubusercontent.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/main/chatgpt-mermaid-enhancer.user.js
+// @downloadURL  https://raw.githubusercontent.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/main/chatgpt-mermaid-enhancer.user.js
+// @supportURL   https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/issues
+// @homepageURL  https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer
 // ==/UserScript==
 
 (function() {

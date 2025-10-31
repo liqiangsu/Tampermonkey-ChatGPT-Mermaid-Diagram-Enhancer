@@ -2,7 +2,7 @@
 
 A Tampermonkey userscript that enhances the ChatGPT web interface by automatically detecting Mermaid diagram code blocks and adding "View Diagram" buttons to visualize them in a beautiful modal popup.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.6-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Tampermonkey](https://img.shields.io/badge/Tampermonkey-Compatible-orange)
 
@@ -26,7 +26,7 @@ A Tampermonkey userscript that enhances the ChatGPT web interface by automatical
 
 ### Install the Script
 1. **Direct Installation** (Recommended):
-   - Click [here](https://raw.githubusercontent.com/yourusername/chatgpt-mermaid-enhancer/main/chatgpt-mermaid-enhancer.user.js) to install directly
+   - Click [here](https://raw.githubusercontent.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/main/chatgpt-mermaid-enhancer.user.js) to install directly
    - Tampermonkey will open and prompt you to install
 
 2. **Manual Installation**:
@@ -165,7 +165,7 @@ mermaid.initialize({
 
 Contributions are welcome! Please feel free to:
 
-1. **Report Issues**: [Open an issue](https://github.com/yourusername/chatgpt-mermaid-enhancer/issues)
+1. **Report Issues**: [Open an issue](https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/issues)
 2. **Submit Pull Requests**: Fork the repo and create a PR
 3. **Suggest Features**: Share ideas in the issues section
 4. **Improve Documentation**: Help make the docs better
@@ -178,6 +178,13 @@ Contributions are welcome! Please feel free to:
 4. Submit a pull request
 
 ## 📋 Changelog
+
+### Version 1.0.6 (2025-10-31)
+- Enhanced zoom functionality with mouse position centering
+- Improved error handling with selectable text and copy functionality  
+- Fixed modal dragging, zooming, and panning interactions
+- Better Mermaid code detection and parsing
+- Added comprehensive error messages and debugging info
 
 ### Version 1.0.0 (2024-10-31)
 - Initial release
@@ -195,6 +202,13 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - [Mermaid.js](https://mermaid.js.org/) - For the amazing diagram rendering library
 - [Tampermonkey](https://www.tampermonkey.net/) - For the userscript platform
+- [OpenAI](https://openai.com/) - For ChatGPT
+- [jsDelivr](https://www.jsdelivr.com/) - For reliable CDN hosting
+
+## 📞 Support
+
+- **GitHub Issues**: [Report bugs or request features](https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/issues)
+- **Discussions**: [Join the discussion](https://github.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/discussions)
 
 ---
 

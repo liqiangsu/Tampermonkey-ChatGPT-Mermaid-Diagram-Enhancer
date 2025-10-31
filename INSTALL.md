@@ -6,6 +6,13 @@
 - [Safari](https://apps.apple.com/us/app/tampermonkey/id1482490089)
 
 ## Step 2: Install the Script
+
+### Option A: Direct Installation (Recommended)
+1. Click [here](https://raw.githubusercontent.com/liqiangsu/Tampermonkey-ChatGPT-Mermaid-Diagram-Enhancer/main/chatgpt-mermaid-enhancer.user.js)
+2. Tampermonkey will automatically open and ask to install
+3. Click "Install" to confirm
+
+### Option B: Manual Installation
 1. Copy the contents of `chatgpt-mermaid-enhancer.user.js`
 2. Open Tampermonkey Dashboard
 3. Click "Create a new script"
