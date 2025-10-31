@@ -727,11 +727,32 @@
     // Function to setup modal interactions (drag, zoom, pan)
     function setupModalInteractions(modal, header, diagramContainer, diagramWrapper, zoomInBtn, zoomOutBtn, resetBtn, resizeHandle) {
         let currentZoom = 1;
+        let currentTranslateX = 0;
+        let currentTranslateY = 0;
         let isDragging = false;
         let isResizing = false;
         let isPanning = false;
         let dragStartX, dragStartY, modalStartX, modalStartY;
         let panStartX, panStartY, wrapperStartX, wrapperStartY;
+
+        // Helper function to get current transform values
+        const getCurrentTransform = () => {
+            const transform = diagramWrapper.style.transform;
+            const scaleMatch = transform.match(/scale\(([^)]+)\)/);
+            const translateMatch = transform.match(/translate\(([^,]+)px,\s*([^)]+)px\)/);
+            
+            currentZoom = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+            currentTranslateX = translateMatch ? parseFloat(translateMatch[1]) : 0;
+            currentTranslateY = translateMatch ? parseFloat(translateMatch[2]) : 0;
+        };
+
+        // Helper function to apply transform
+        const applyTransform = (zoom, translateX, translateY) => {
+            currentZoom = zoom;
+            currentTranslateX = translateX;
+            currentTranslateY = translateY;
+            diagramWrapper.style.transform = `scale(${zoom}) translate(${translateX}px, ${translateY}px)`;
+        };
 
         // Make modal draggable by header
         header.addEventListener('mousedown', (e) => {
@@ -753,24 +774,51 @@
             e.preventDefault();
         });
 
-        // Zoom functionality
-        const updateZoom = (newZoom) => {
-            currentZoom = Math.max(0.1, Math.min(5, newZoom));
-            diagramWrapper.style.transform = `scale(${currentZoom})`;
+        // Zoom functionality with center point preservation
+        const zoomAtPoint = (newZoom, centerX = null, centerY = null) => {
+            getCurrentTransform();
+            
+            const clampedZoom = Math.max(0.1, Math.min(5, newZoom));
+            const zoomRatio = clampedZoom / currentZoom;
+            
+            if (centerX !== null && centerY !== null) {
+                // Zoom at specific point (for mouse wheel)
+                const containerRect = diagramContainer.getBoundingClientRect();
+                const relativeX = centerX - containerRect.left - containerRect.width / 2;
+                const relativeY = centerY - containerRect.top - containerRect.height / 2;
+                
+                // Calculate new translation to keep the point under cursor
+                const newTranslateX = currentTranslateX - (relativeX * (zoomRatio - 1)) / currentZoom;
+                const newTranslateY = currentTranslateY - (relativeY * (zoomRatio - 1)) / currentZoom;
+                
+                applyTransform(clampedZoom, newTranslateX, newTranslateY);
+            } else {
+                // Zoom at current center (for zoom buttons)
+                const newTranslateX = currentTranslateX * zoomRatio;
+                const newTranslateY = currentTranslateY * zoomRatio;
+                
+                applyTransform(clampedZoom, newTranslateX, newTranslateY);
+            }
         };
 
-        zoomInBtn.addEventListener('click', () => updateZoom(currentZoom * 1.2));
-        zoomOutBtn.addEventListener('click', () => updateZoom(currentZoom / 1.2));
+        // Button zoom - maintain current center
+        zoomInBtn.addEventListener('click', () => {
+            zoomAtPoint(currentZoom * 1.2);
+        });
+        
+        zoomOutBtn.addEventListener('click', () => {
+            zoomAtPoint(currentZoom / 1.2);
+        });
+        
         resetBtn.addEventListener('click', () => {
-            updateZoom(1);
-            diagramWrapper.style.transform = `scale(1) translate(0px, 0px)`;
+            applyTransform(1, 0, 0);
         });
 
-        // Wheel zoom
+        // Wheel zoom - zoom at mouse position
         diagramContainer.addEventListener('wheel', (e) => {
             e.preventDefault();
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-            updateZoom(currentZoom * zoomFactor);
+            zoomAtPoint(currentZoom * zoomFactor, e.clientX, e.clientY);
         });
 
         // Pan functionality on diagram
@@ -781,10 +829,9 @@
             panStartX = e.clientX;
             panStartY = e.clientY;
             
-            const transform = diagramWrapper.style.transform;
-            const translateMatch = transform.match(/translate\(([^,]+),([^)]+)\)/);
-            wrapperStartX = translateMatch ? parseFloat(translateMatch[1]) : 0;
-            wrapperStartY = translateMatch ? parseFloat(translateMatch[2]) : 0;
+            getCurrentTransform();
+            wrapperStartX = currentTranslateX;
+            wrapperStartY = currentTranslateY;
             
             diagramContainer.style.cursor = 'grabbing';
             e.preventDefault();
@@ -804,10 +851,14 @@
                 const deltaX = e.clientX - panStartX;
                 const deltaY = e.clientY - panStartY;
                 
-                const newX = wrapperStartX + deltaX;
-                const newY = wrapperStartY + deltaY;
+                // Scale the delta by the inverse of zoom for consistent panning speed
+                const scaledDeltaX = deltaX / currentZoom;
+                const scaledDeltaY = deltaY / currentZoom;
                 
-                diagramWrapper.style.transform = `scale(${currentZoom}) translate(${newX}px, ${newY}px)`;
+                const newX = wrapperStartX + scaledDeltaX;
+                const newY = wrapperStartY + scaledDeltaY;
+                
+                applyTransform(currentZoom, newX, newY);
             }
         });
 
