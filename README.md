@@ -195,13 +195,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - [Mermaid.js](https://mermaid.js.org/) - For the amazing diagram rendering library
 - [Tampermonkey](https://www.tampermonkey.net/) - For the userscript platform
-- [OpenAI](https://openai.com/) - For ChatGPT
-- [jsDelivr](https://www.jsdelivr.com/) - For reliable CDN hosting
-
-## 📞 Support
-
-- **GitHub Issues**: [Report bugs or request features](https://github.com/yourusername/chatgpt-mermaid-enhancer/issues)
-- **Discussions**: [Join the discussion](https://github.com/yourusername/chatgpt-mermaid-enhancer/discussions)
 
 ---
 
